@@ -1,28 +1,28 @@
-import React from 'react';
-import useTheme from './contexts/Theme';
+import React from 'react'
+import useTheme from './contexts/theme';
 
 export default function ThemeBtn() {
-  const { themeMode, lightTheme, darkTheme } = useTheme();
-
-  const onChangeBtn = (e) => {
-    const darkModeStatus = e.currentTarget.checked;
-    darkModeStatus ? darkTheme() : lightTheme();
-  };
-
-  return (
-    <label className="flex items-center gap-3 cursor-pointer">
-      <input
-        type="checkbox"
-        className="sr-only peer"
-        onChange={onChangeBtn}
-        checked={themeMode === 'dark'}
-      />
-      <div className="relative w-12 h-6 bg-gray-300 dark:bg-gray-700 rounded-full peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 transition-colors duration-300 peer-checked:bg-blue-600">
-        <div className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md transform peer-checked:translate-x-6 transition-transform duration-300"></div>
-      </div>
-      <span className="text-sm font-medium text-gray-900 dark:text-gray-200 transition-colors duration-300">
-        Toggle Theme
-      </span>
-    </label>
-  );
+    
+    const {themeMode, lightTheme, darkTheme} = useTheme()
+    const onChangeBtn = (e) => {
+        const darkModeStatus = e.currentTarget.checked
+        if (darkModeStatus) {
+            darkTheme()
+        } else {
+            lightTheme()
+        }
+    }
+    return (
+        <label className="relative inline-flex items-center cursor-pointer">
+            <input
+                type="checkbox"
+                value=""
+                className="sr-only peer"
+                onChange={onChangeBtn}
+                checked={themeMode=== "dark"}
+            />
+            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            <span className="ml-3 text-sm font-medium text-gray-900">Toggle Theme</span>
+        </label>
+    );
 }
